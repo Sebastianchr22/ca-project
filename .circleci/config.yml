@@ -4,28 +4,12 @@ workflows:
   test_and_packaging:
 
     jobs:
-      - package
       - test:
-         requires:
-           - package
       - dockerize:
          requires:
            - test
       
 jobs:
-  package:
-    docker:
-      - image: sebastiansc/pythonapp:latest
-    steps:
-      - checkout
-      - run:
-         name: package and push
-         command:
-           docker build -t sebastiansc/pythonapp:latest .
-      - store_artifacts:
-          path: .
-          destination: output
-  
   test:
     docker:
       - image: sebastiansc/pythonapp:latest
