@@ -17,4 +17,4 @@ jobs:
           command:
             python tests.py
       - store_test_results:
-          path: tmp/
+          path: .
