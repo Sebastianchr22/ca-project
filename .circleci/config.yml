@@ -37,8 +37,6 @@ jobs:
       - checkout
       - run:
           name: Package and store Artifacts
-          command:
-            python run.py
       - store_artifacts:
           path: build/libs
           destination: output
