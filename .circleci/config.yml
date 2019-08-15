@@ -48,7 +48,7 @@ jobs:
       
   ssh:
     docker:
-      - image: docker:alpine
+      - image: alpine
     steps:
       - add_ssh_keys:
           fingerprints:
