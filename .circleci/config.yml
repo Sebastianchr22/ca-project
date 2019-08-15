@@ -1,6 +1,6 @@
 workflows:
 
-  version: '2'
+  version: 2
   test_and_packaging:
 
     jobs:
