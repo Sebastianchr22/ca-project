@@ -48,7 +48,7 @@ jobs:
       
   ssh:
     docker:
-       image: docker:alpine
+      - image: docker:alpine
     steps:
       - add_ssh_keys:
           fingerprints:
@@ -56,6 +56,3 @@ jobs:
       - run:
              ssh -i codeacsdu ubuntu@35.240.114.104
              docker run -d $DOCKER_USER/myapp:$CIRCLE_SHA1 
-      - store_artifacts:
-          path: .
-          destination: output      
