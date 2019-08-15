@@ -4,7 +4,7 @@ workflows:
   test_and_packaging:
 
     jobs:
-      - test:
+      - test
       - dockerize:
          requires:
            - test
