@@ -8,7 +8,10 @@ workflows:
       - dockerize:
          requires:
            - test
-      
+      - build:
+         requires:
+           - dockerize
+
 jobs:
   test:
     docker:
@@ -16,11 +19,12 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Build and test
-          command:
+          name: test
+          command: |
+            mkdir test-out
             python tests.py
       - store_test_results:
-          path: .
+          path: /test-out/
       - store_artifacts:
           path: .
           destination: prefix
@@ -38,3 +42,18 @@ jobs:
 
       # deploy the image
       - run: docker push $DOCKER_USER/pythonapp:$CIRCLE_SHA1
+  
+  build:
+    machine: true
+    docker:
+      - image: sebastiansc/pythonapp:$CIRCLE_SHA1
+    steps:
+      - checkout
+      - run:
+          name: build
+          command: |
+            mkdir build-out
+            docker run -d $DOCKER_USER/myapp:$CIRCLE_SHA1 
+      - store_artifacts:
+          path: /build-out/
+          destination: output      
