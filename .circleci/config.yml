@@ -12,7 +12,7 @@ workflows:
 jobs:
   test:
     docker:
-      - image: sebastiansc/python:latest
+      - image: sebastiansc/pythonapp:latest
     steps:
       - attach_workspace:
           at: .
@@ -32,7 +32,7 @@ jobs:
 
   package:
     docker:
-      - image: sebastiansc/python:latest
+      - image: sebastiansc/pythonapp:latest
     steps:
       - checkout
       - run:
