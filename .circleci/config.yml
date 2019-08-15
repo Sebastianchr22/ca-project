@@ -17,5 +17,4 @@ jobs:
           command:
             python tests.py
       - store_test_results:
-          path: test-results
-          destination: pythonbuild
+          path: tmp/
