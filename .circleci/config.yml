@@ -4,10 +4,7 @@ workflows:
   test_and_packaging:
 
     jobs:
-      - package
-      - test:
-          requires:
-            - package
+      - test
       
 jobs:
   test:
@@ -26,25 +23,3 @@ jobs:
             python test.py
       - store_test_results:
           path: build/test-results
-      
-     
-
-
-  package:
-    docker:
-      - image: sebastiansc/pythonapp:latest
-    steps:
-      - checkout
-      - run:
-          name: Package and store Artifacts
-      - store_artifacts:
-          path: build/libs
-          destination: output
-      - persist_to_workspace:
-          root: .
-          paths:
-            - .
-      - save_cache:
-          key: my-dependencies-{{ checksum "build.gradle" }}
-          paths:
-            - my-project/my-dependencies-directory
