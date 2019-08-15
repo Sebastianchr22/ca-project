@@ -5,12 +5,12 @@ workflows:
 
     jobs:
       - package
-      - test
-          requires:
-            - package
-      - dockerize
-          requires:
-            - test
+      - test:
+         requires:
+           - package
+      - dockerize:
+         requires:
+           - test
       
 jobs:
   package:
