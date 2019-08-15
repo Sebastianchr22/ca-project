@@ -18,7 +18,3 @@ jobs:
             python tests.py
       - store_test_results:
           path: build/test-results
-
-      - persist_to_workspace:
-          root: .
-          paths: .
