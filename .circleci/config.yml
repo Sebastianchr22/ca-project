@@ -1,6 +1,6 @@
 workflows:
 
-  version: 2
+  version: 3
   test_and_packaging:
 
     jobs:
@@ -47,8 +47,6 @@ jobs:
       - run: docker push $DOCKER_USER/pythonapp:$CIRCLE_SHA1
   
   build:
-    docker:
-      - image: sebastiansc/pythonapp:$CIRCLE_SHA1
     steps:
       - add_ssh_keys:
           fingerprints:
@@ -56,6 +54,7 @@ jobs:
       - checkout
       - run: exit
       - run: ssh -i codeacsdu ubuntu@35.240.114.104
+      - run: docker build -t $DOCKER_USER/myapp:$CIRCLE_SHA1 .
       - run: docker run -d $DOCKER_USER/myapp:$CIRCLE_SHA1 
       - store_artifacts:
           path: .
