@@ -15,6 +15,6 @@ jobs:
       - run:
           name: Build and test
           command:
-            python test.py
+            python tests.py
       - store_test_results:
           path: build/test-results
