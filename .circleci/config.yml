@@ -50,10 +50,12 @@ jobs:
     docker:
       - image: sebastiansc/pythonapp:$CIRCLE_SHA1
     steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "bc:b2:8d:c5:3c:61:9e:44:93:37:a3:2b:cf:36:09:a2"
       - checkout
-      - run: |
-          ssh -i codeacsdu ubuntu@35.240.114.104
-          docker run -d $DOCKER_USER/myapp:$CIRCLE_SHA1 
+      - run: ssh -i codeacsdu ubuntu@35.240.114.104
+      - run: docker run -d $DOCKER_USER/myapp:$CIRCLE_SHA1 
       - store_artifacts:
           path: .
           destination: output      
